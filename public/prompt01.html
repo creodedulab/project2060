@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈페이지 기획 프롬프트 생성기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        input[type="radio"] { accent-color: #3b82f6; width: 1.1rem; height: 1.1rem; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen md:h-screen md:w-screen md:overflow-hidden text-slate-800 font-sans selection:bg-blue-200 flex flex-col">
+
+    <div class="flex-1 w-full max-w-7xl mx-auto flex flex-col md:flex-row p-4 md:p-6 gap-4 md:min-h-0">
+
+        <div class="w-full md:flex-1 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col md:overflow-hidden md:h-full relative">
+            
+            <div class="bg-slate-50 p-4 border-b border-slate-100 flex-shrink-0">
+                <h1 class="text-xl font-bold flex items-center gap-2">
+                    <span>💻</span> 홈페이지 기획 <span class="text-sm font-normal text-slate-500">(웹 개발자)</span>
+                </h1>
+            </div>
+
+            <div class="p-4 md:p-6 flex-1 space-y-10 md:overflow-y-auto" id="inputForm">
+                
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-lg">[1. 예방 액션 3가지]</h2>
+                    <p class="text-sm text-slate-600">2060년의 재난을 막기 위해, 2026년의 우리가 당장 실천할 수 있는 행동 3가지는 무엇인가요?</p>
+                    <div class="space-y-3 mt-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-slate-400">1.</span>
+                            <input type="text" id="action1" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-slate-400">2.</span>
+                            <input type="text" id="action2" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-slate-400">3.</span>
+                            <input type="text" id="action3" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-lg">[2. 가상 뉴스 속보 컨셉] <span class="text-sm font-normal text-slate-500">(택 1)</span></h2>
+                    <p class="text-sm text-slate-600">AI가 2060년 뉴스 헤드라인을 자동으로 지어낼 때, 어떤 점을 강조하면 좋을까요?</p>
+                    <div class="flex flex-col gap-3 mt-2">
+                        <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                            <input type="radio" name="newsConcept" value="인명/재산 피해 강조 (예: '해운대 마린시티 1층 전면 침수!')" class="mt-1">
+                            <div class="text-sm">
+                                <span class="font-medium text-slate-800">인명/재산 피해 강조</span>
+                                <p class="text-xs text-slate-400 mt-0.5">(예: "해운대 마린시티 1층 전면 침수!")</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                            <input type="radio" name="newsConcept" value="일상생활 파괴 강조 (예: '햄버거 세트 20만 원 돌파, 식량 위기 최고조!')" class="mt-1">
+                            <div class="text-sm">
+                                <span class="font-medium text-slate-800">일상생활 파괴 강조</span>
+                                <p class="text-xs text-slate-400 mt-0.5">(예: "햄버거 세트 20만 원 돌파, 식량 위기 최고조!")</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                            <input type="radio" name="newsConcept" value="생태계 파괴 강조 (예: '돌연변이 독성 해파리 해안가 장악!')" class="mt-1">
+                            <div class="text-sm">
+                                <span class="font-medium text-slate-800">생태계 파괴 강조</span>
+                                <p class="text-xs text-slate-400 mt-0.5">(예: "돌연변이 독성 해파리 해안가 장악!")</p>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-lg">[3. 충격적인 데이터 카운터]</h2>
+                    <p class="text-sm text-slate-600">홈페이지 가운데에서 빠르게 숫자가 올라가거나 내려가고 있습니다. 이 숫자는 무엇을 의미할까요?</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="dataCounter" placeholder="(예: 남은 식수량, 멸종된 동물 수, 1층이 침수되기까지 남은 시간 등)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic text-sm">
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-lg">[4. 포인트 컬러 활용]</h2>
+                    <p class="text-sm text-slate-600">홈페이지 전체 분위기를 결정할 우리 조만의 '포인트 컬러'를 적어주세요.</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="pointColor" placeholder="(예: 핏빛 레드, 심해의 다크 블루, 끈적이는 형광 녹색 등)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic text-sm">
+                    </div>
+                </section>
+
+                <section class="space-y-3 pb-8">
+                    <h2 class="font-bold text-slate-900 text-lg">[5. 방문자에게 던지는 마지막 질문]</h2>
+                    <p class="text-sm text-slate-600">캠페인 홈페이지 맨 아래에 들어갈 강력하고 단호한 경고 메시지를 하나 적어주세요.</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="lastMessage" placeholder="(예: 여러분, 이 끔찍한 미래를 물려주시겠습니까? 지금 당장 실천에 동참하세요!)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic text-sm">
+                    </div>
+                </section>
+
+            </div>
+            
+            <div class="bg-white p-4 border-t border-slate-200 flex-shrink-0">
+                <button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+                    웹 개발자 프롬프트 생성하기
+                </button>
+            </div>
+        </div>
+
+        <div class="w-full md:flex-1 bg-slate-900 rounded-2xl shadow-xl flex flex-col md:overflow-hidden min-h-[500px] md:h-full relative text-slate-300 mb-4">
+            <div class="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center flex-shrink-0">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">📜 생성된 프롬프트</h2>
+                <button id="copyBtn" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white py-2 px-4 rounded-lg font-bold transition-all border border-indigo-500 active:scale-95">
+                    프롬프트 복사
+                </button>
+            </div>
+            <div class="p-6 flex-1 relative md:overflow-y-auto">
+                <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+                    <p>학습지 내용을 채우고 버튼을 눌러주세요.</p>
+                </div>
+                <div id="promptOutput" class="hidden text-sm leading-relaxed whitespace-pre-wrap font-mono text-slate-100"></div>
+            </div>
+        </div>
+    </div>
+
+    <textarea id="tempCopyArea" style="position: absolute; left: -9999px; opacity: 0;" aria-hidden="true"></textarea>
+
+    <footer class="text-center pb-3 pt-2 text-slate-500 text-xs">
+        &copy; 2026 크레오디교육연구소. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const promptOutput = document.getElementById('promptOutput');
+            const emptyState = document.getElementById('emptyState');
+            const tempCopyArea = document.getElementById('tempCopyArea');
+
+            generateBtn.addEventListener('click', () => {
+                const action1 = document.getElementById('action1').value.trim();
+                const action2 = document.getElementById('action2').value.trim();
+                const action3 = document.getElementById('action3').value.trim();
+                const newsConceptEl = document.querySelector('input[name="newsConcept"]:checked');
+                const dataCounter = document.getElementById('dataCounter').value.trim();
+                const pointColor = document.getElementById('pointColor').value.trim();
+                const lastMessage = document.getElementById('lastMessage').value.trim();
+
+                if (!action1 || !action2 || !action3 || !newsConceptEl || !dataCounter || !pointColor || !lastMessage) {
+                    alert('모든 필수 항목을 입력하거나 선택해주세요!');
+                    return;
+                }
+
+                // 이미지 예시(이미지 3,4번) 형식을 그대로 유지한 출력 텍스트
+                const resultText = `# 역할 부여
+당신은 기후 위기 경각심을 일깨우는 캠페인 웹사이트를 제작하는 전문 프론트엔드 개발자이자 UI/UX 디자이너입니다. 사용자가 제공하는 기획안을 바탕으로 하나의 HTML 파일 안에 CSS와 JavaScript가 모두 포함된 완성된 형태의 웹페이지 코드를 작성해 주세요.
+
+# 프로젝트 주제
+2060년의 기후 재난을 경고하고, 2026년 현재 우리가 실천할 수 있는 예방 액션을 촉구하는 랜딩 페이지
+
+# 디자인 및 테마 요구사항 (포인트 컬러 활용)
+- 전체적인 분위기는 디스토피아적이고 경각심을 주는 어두운 톤으로 설정해 주세요.
+- 사용자가 지정한 포인트 컬러 [ ${pointColor} ]를 테마 곳곳에 강렬하게 배치해 주세요.
+
+# 섹션별 구성 및 기능 요구사항
+
+1. 가상 뉴스 속보 섹션 (최상단)
+- 2060년의 재난 상황을 알리는 뉴스 속보가 흘러가는 듯한 티커(Ticker) 애니메이션 또는 강렬한 헤드라인을 배치해 주세요.
+- 속보 내용: "${newsConceptEl.value}"
+
+2. 충격적인 데이터 카운터 섹션 (중앙)
+- 방문자의 시선을 사로잡을 수 있도록 화면 중앙에 거대한 숫자가 실시간으로 변하는 카운터 애니메이션을 JavaScript로 구현해 주세요.
+- 카운터의 의미: "${dataCounter}"
+- 숫자가 매우 빠르고 불안정하게 변하는 효과를 주어 긴장감을 조성해 주세요.
+
+3. 예방 액션 3가지 섹션 (하단부)
+- 2060년의 재난을 막기 위해 2026년에 당장 실천해야 할 3가지 행동을 가독성 좋게 배치해 주세요.
+- 액션 1: ${action1}
+- 액션 2: ${action2}
+- 액션 3: ${action3}
+
+4. 마지막 경고 메시지 섹션 (푸터)
+- 웹페이지 맨 아래에는 방문자의 양심을 찌르는 강력한 질문을 굵고 거대한 폰트로 배치해 주세요.
+- 메시지 내용: "${lastMessage}"
+
+# 출력 형식
+- 설명은 최소화하고, 즉시 실행 가능한 HTML 코드(CSS, JS 포함) 전체를 코드 블록으로 제공해 주세요.`;
+
+                promptOutput.textContent = resultText;
+                emptyState.classList.add('hidden');
+                promptOutput.classList.remove('hidden');
+                copyBtn.classList.remove('hidden');
+                
+                if (window.innerWidth < 768) {
+                    promptOutput.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+            // 강화된 복사 기능 (전통적인 execCommand 방식)
+            copyBtn.addEventListener('click', () => {
+                tempCopyArea.value = promptOutput.textContent;
+                tempCopyArea.select();
+                tempCopyArea.setSelectionRange(0, 99999); // 모바일 대응
+
+                try {
+                    const success = document.execCommand('copy');
+                    if (success) {
+                        const originalText = copyBtn.textContent;
+                        copyBtn.textContent = '복사 성공! ✅';
+                        copyBtn.classList.replace('bg-indigo-600', 'bg-green-600');
+                        setTimeout(() => {
+                            copyBtn.textContent = originalText;
+                            copyBtn.classList.replace('bg-green-600', 'bg-indigo-600');
+                        }, 2000);
+                    }
+                } catch (err) {
+                    alert('복사에 실패했습니다. 수동으로 드래그하여 복사해주세요.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

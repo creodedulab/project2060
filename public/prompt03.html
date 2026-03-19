@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환경 경각심 포스터 프롬프트 생성기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        input[type="radio"] { accent-color: #3b82f6; width: 1.1rem; height: 1.1rem; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen md:h-screen md:w-screen md:overflow-hidden text-slate-800 font-sans selection:bg-blue-200 flex flex-col">
+
+    <div class="flex-1 w-full max-w-7xl mx-auto flex flex-col md:flex-row p-4 md:p-6 gap-4 md:min-h-0">
+
+        <div class="w-full md:flex-1 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col md:overflow-hidden md:h-full relative text-sm">
+            
+            <div class="bg-slate-50 p-4 border-b border-slate-100 flex-shrink-0">
+                <h1 class="text-xl font-bold flex items-center gap-2">
+                    <span>🎨</span> 포스터 기획 <span class="text-sm font-normal text-slate-500">(비주얼 디자이너)</span>
+                </h1>
+                <p class="text-xs text-slate-500 mt-1">우리 조의 재난 상황을 가장 잘 보여줄 수 있는 포스터 이미지를 기획해 주세요.</p>
+            </div>
+
+            <div class="p-4 md:p-6 flex-1 space-y-8 md:overflow-y-auto" id="inputForm">
+                
+                <section class="space-y-2">
+                    <h2 class="font-bold text-slate-900 text-base">[1. 포스터 전체 이미지 컨셉]</h2>
+                    <p class="text-xs text-slate-600">어떤 장면이 들어가면 사람들이 위험을 딱 느낄 수 있을까요?</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="posterConcept" placeholder="(예: 폐허가 된 도시, 물에 잠긴 도로)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic">
+                    </div>
+                </section>
+
+                <section class="space-y-2">
+                    <h2 class="font-bold text-slate-900 text-base">[2. 중앙에 들어갈 핵심 피사체]</h2>
+                    <p class="text-xs text-slate-600">시선을 사로잡을 확실한 '주인공(사물/인물)'을 지정해 주세요.</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="mainSubject" placeholder="(예: 반쯤 물에 잠긴 롯데타워, 방독면을 든 아이 등)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic">
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-base">[3. 카메라 구도 선택] (택 1)</h2>
+                    <p class="text-xs text-slate-600">재난의 거대함을 보여줄지, 피해자의 슬픔을 보여줄지 시선을 결정해 주세요.</p>
+                    <div class="flex flex-col gap-2 mt-2">
+                        <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+                            <input type="radio" name="cameraAngle" value="low" class="mt-1">
+                            <div><span class="font-bold">로우 앵글</span> <span class="text-xs text-slate-400">(아래에서 위로 올려다봄 -> 재난의 거대함 강조)</span></div>
+                        </label>
+                        <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+                            <input type="radio" name="cameraAngle" value="high" class="mt-1">
+                            <div><span class="font-bold">하이 앵글</span> <span class="text-xs text-slate-400">(위에서 아래로 내려다봄 -> 무기력함, 고립감 강조)</span></div>
+                        </label>
+                        <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+                            <input type="radio" name="cameraAngle" value="close" class="mt-1">
+                            <div><span class="font-bold">클로즈업</span> <span class="text-xs text-slate-400">(아주 가깝게 -> 디테일, 슬픈 감정 강조)</span></div>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-base">[4. 포스터 그림체] (택 1)</h2>
+                    <p class="text-xs text-slate-600">포스터의 전체적인 시각 스타일을 선택하세요.</p>
+                    <div class="grid grid-cols-2 gap-3 mt-2">
+                        <label class="flex items-center gap-2 cursor-pointer border p-2 rounded-lg hover:bg-slate-50">
+                            <input type="radio" name="artStyle" value="3d_toon">
+                            <span>3D 애니메이션 <span class="text-xs text-slate-400">(디즈니 느낌)</span></span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer border p-2 rounded-lg hover:bg-slate-50">
+                            <input type="radio" name="artStyle" value="realistic">
+                            <span>실사 / 영화 촬영 <span class="text-xs text-slate-400">(진지한 느낌)</span></span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer border p-2 rounded-lg hover:bg-slate-50">
+                            <input type="radio" name="artStyle" value="cyberpunk">
+                            <span>사이버펑크 / 네온</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer border p-2 rounded-lg hover:bg-slate-50">
+                            <input type="radio" name="artStyle" value="retro_pixel">
+                            <span>레트로 픽셀 아트</span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="space-y-2">
+                    <h2 class="font-bold text-slate-900 text-base">[5. 포스터 핵심 문구 (카피라이팅)]</h2>
+                    <p class="text-xs text-slate-600">💡 AI 활용: "해수면 상승 경고 포스터 문구 3개만 추천해줘" 라고 질문해 보세요!</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="mainCopy" placeholder="결정된 핵심 문구를 입력하세요" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic text-sm">
+                    </div>
+                </section>
+
+                <section class="space-y-2 pb-8">
+                    <h2 class="font-bold text-slate-900 text-base">[6. 텍스트 디자인 (타이포그래피 스타일)]</h2>
+                    <p class="text-xs text-slate-600">포스터의 핵심 문구가 어떤 스타일의 글씨체로 적히면 어울릴까요?</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="typographyStyle" placeholder="(예: 거칠게 박박 긁힌 느낌의 글씨, 피가 흐르는 듯한 글씨 등)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic text-sm">
+                    </div>
+                </section>
+
+            </div>
+            
+            <div class="bg-white p-4 border-t border-slate-200 flex-shrink-0">
+                <button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+                    포스터 생성 프롬프트 만들기
+                </button>
+            </div>
+        </div>
+
+        <div class="w-full md:flex-1 bg-slate-900 rounded-2xl shadow-xl flex flex-col md:overflow-hidden min-h-[500px] md:h-full relative text-slate-300 mb-4 md:mb-0">
+            <div class="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center flex-shrink-0">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">📜 생성된 프롬프트</h2>
+                <button id="copyBtn" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white py-2 px-4 rounded-lg font-bold transition-all border border-indigo-400 active:scale-95">
+                    프롬프트 복사
+                </button>
+            </div>
+            <div class="p-6 flex-1 relative md:overflow-y-auto">
+                <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+                    <p>기획서 내용을 채우고 버튼을 눌러주세요.</p>
+                </div>
+                <div id="promptOutput" class="hidden text-sm leading-relaxed whitespace-pre-wrap font-mono text-slate-100"></div>
+            </div>
+        </div>
+    </div>
+
+    <textarea id="tempCopyArea" style="position: absolute; left: -9999px; opacity: 0;" aria-hidden="true"></textarea>
+
+    <footer class="text-center pb-3 pt-2 text-slate-500 text-xs">
+        &copy; 2026 크레오디교육연구소. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const promptOutput = document.getElementById('promptOutput');
+            const emptyState = document.getElementById('emptyState');
+            const tempCopyArea = document.getElementById('tempCopyArea');
+
+            // 간단한 영번역 맵 (학습용 예시)
+            const translationMap = {
+                // 구도
+                low: "low angle, worm's eye view",
+                high: "high angle, bird's eye view",
+                close: "close-up shot",
+                // 그림체
+                "3d_toon": "3D animated movie poster, Pixar style,",
+                realistic: "cinematic film, photorealistic, cinematic lighting,",
+                cyberpunk: "cyberpunk style, neon lighting, futuristic,",
+                "retro_pixel": "retro pixel art style, 8-bit, 16-bit,",
+                // 텍스트 스타일 (자주 쓰이는 예시)
+                "거칠게 박박 긁힌 느낌": "rough, hand-scratched typography",
+                "피가 흐르는 듯한": "dripping blood style font",
+                "차갑고 딱딱한 경고문 느낌의 고딕체": "bold, cold, industrial gothic sans-serif font"
+            };
+
+            generateBtn.addEventListener('click', () => {
+                const concept = document.getElementById('posterConcept').value.trim();
+                const subject = document.getElementById('mainSubject').value.trim();
+                const angle = document.querySelector('input[name="cameraAngle"]:checked');
+                const style = document.querySelector('input[name="artStyle"]:checked');
+                const copy = document.getElementById('mainCopy').value.trim();
+                const typo = document.getElementById('typographyStyle').value.trim();
+
+                if (!concept || !subject || !angle || !style || !copy || !typo) {
+                    alert('모든 필수 항목을 입력하거나 선택해주세요!');
+                    return;
+                }
+
+                const styleEng = translationMap[style.value] || "";
+                const angleEng = translationMap[angle.value] || "";
+                
+                // 간단 영번역 시도 (입력값에 매핑되는 게 있으면 쓰고, 없으면 그대로 둠)
+                let conceptEng = concept; // 실제로는 번역 API나 더 큰 매핑 테이블 필요
+                let subjectEng = subject;
+                let typoEng = translationMap[typo] || typo; // 자주 쓰는 것만 번역
+
+                const resultText = `[1단계: 기본 구조 (Basic Structure)]
+${styleEng} of ${concept} featuring ${subject} in the center. Shot with ${angleEng} perspective. Include prominent text that says "${copy}".
+
+[2단계: 상세 묘사 (Detailed Description)]
+- [2. 핵심 피사체] 묘사: A detailed description of [ ${subject} ] should be included here to improve quality. (Please refine this subjective description in English)
+- [4. 포스터 그림체] & 분위기: ${styleEng}
+- [1. 전체 이미지 컨셉] & 색상: A desolate backdrop of [ ${concept} ] under an oppressive sky. Define the dominant color palette.
+
+[3단계: 텍스트 및 서체 (Text & Typography)]
+- (핵심 문구): ${copy}
+- (텍스트 디자인): [ ${typo} ] style typography for the text. (${typoEng})`;
+
+                promptOutput.textContent = resultText;
+                emptyState.classList.add('hidden');
+                promptOutput.classList.remove('hidden');
+                copyBtn.classList.remove('hidden');
+                copyBtn.classList.add('flex');
+                
+                if (window.innerWidth < 768) {
+                    promptOutput.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+            // 강화된 복사 기능 (전통적인 execCommand 방식)
+            copyBtn.addEventListener('click', () => {
+                tempCopyArea.value = promptOutput.textContent;
+                tempCopyArea.select();
+                tempCopyArea.setSelectionRange(0, 99999); // 모바일 대응
+
+                try {
+                    const success = document.execCommand('copy');
+                    if (success) {
+                        const originalText = copyBtn.innerHTML;
+                        copyBtn.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-300"><polyline points="20 6 9 17 4 12"/></svg>
+                            복사 성공!
+                        `;
+                        copyBtn.classList.replace('bg-indigo-600', 'bg-green-700');
+                        setTimeout(() => {
+                            copyBtn.innerHTML = originalText;
+                            copyBtn.classList.replace('bg-green-700', 'bg-indigo-600');
+                        }, 2000);
+                    }
+                } catch (err) {
+                    alert('복사에 실패했습니다. 직접 드래그하여 복사해주세요.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

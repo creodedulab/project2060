@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미니게임 기획 프롬프트 생성기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        input[type="radio"] { accent-color: #3b82f6; width: 1.1rem; height: 1.1rem; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen md:h-screen md:w-screen md:overflow-hidden text-slate-800 font-sans selection:bg-blue-200 flex flex-col">
+
+    <div class="flex-1 w-full max-w-7xl mx-auto flex flex-col md:flex-row p-4 md:p-6 gap-4 md:min-h-0">
+
+        <div class="w-full md:flex-1 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col md:overflow-hidden md:h-full relative text-sm">
+            
+            <div class="bg-slate-50 p-4 border-b border-slate-100 flex-shrink-0">
+                <h1 class="text-xl font-bold flex items-center gap-2">
+                    <span>🎮</span> 미니게임 기획 <span class="text-sm font-normal text-slate-500">(게임 개발자)</span>
+                </h1>
+                <p class="text-xs text-slate-500 mt-1">우리 조의 재난 상황을 가장 잘 보여줄 수 있는 게임 형태를 고르고, 빈칸을 채워주세요.</p>
+            </div>
+
+            <div class="p-4 md:p-6 flex-1 space-y-8 md:overflow-y-auto" id="inputForm">
+                
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-base">[1. 장르 선택] (택 1)</h2>
+                    <div class="flex flex-col gap-2 mt-2">
+                        <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+                            <input type="radio" name="genre" value="낙하형 (위에서 떨어지는 것을 피하거나 먹는 형태)" class="mt-1">
+                            <div><span class="font-bold">낙하형</span> (예: 똥피하기) <p class="text-[11px] text-slate-400">위에서 떨어지는 '이것'을 피하거나 먹어야 해!</p></div>
+                        </label>
+                        <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+                            <input type="radio" name="genre" value="런닝형 (계속 앞으로 달려가며 장애물을 피하는 형태)" class="mt-1">
+                            <div><span class="font-bold">런닝형</span> (예: 공룡 달리기) <p class="text-[11px] text-slate-400">계속 앞으로 달려가며 장애물을 뛰어넘어야 해!</p></div>
+                        </label>
+                        <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition-all">
+                            <input type="radio" name="genre" value="생존형 (사방에서 몰려오는 적을 피하는 형태)" class="mt-1">
+                            <div><span class="font-bold">생존형</span> (예: 뱀파이어 서바이버즈) <p class="text-[11px] text-slate-400">사방에서 몰려오는 '이것'을 피해 살아남아야 해!</p></div>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="space-y-2">
+                    <h2 class="font-bold text-slate-900 text-base">[2. 게임 배경(무대) 설정]</h2>
+                    <p class="text-xs text-slate-600">어떤 재난 상황이 배경으로 깔리나요? 2060년의 모습을 시각적으로 묘사해 주세요.</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="gameBackground" placeholder="(예: 쓰레기 산이 되어버린 학교 운동장 등)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none transition-colors italic">
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-base">[3. 캐릭터 설정]</h2>
+                    <div class="space-y-3 pl-2 border-l-2 border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <span class="w-32 shrink-0">• 주인공 (플레이어):</span>
+                            <input type="text" id="player" placeholder="(예: 튜브 탄 학생, 바다거북)" class="flex-1 border-b border-slate-200 outline-none focus:border-blue-500 p-1">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-32 shrink-0">• 방해물 (피해야 할 것):</span>
+                            <input type="text" id="obstacle" placeholder="(예: 쓰레기, 농약 방울)" class="flex-1 border-b border-slate-200 outline-none focus:border-blue-500 p-1">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-32 shrink-0">• 아이템 (선택사항):</span>
+                            <input type="text" id="item" placeholder="(예: 깨끗한 물방울)" class="flex-1 border-b border-slate-200 outline-none focus:border-blue-500 p-1">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h2 class="font-bold text-slate-900 text-base">[4. 엔딩 조건]</h2>
+                    <div class="space-y-3 pl-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-24 shrink-0">• 승리 조건:</span>
+                            <input type="text" id="winCond" placeholder="(예: 30초 버티기, 10개 줍기 등)" class="flex-1 border-b border-slate-200 outline-none focus:border-blue-500 p-1">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-24 shrink-0">• 실패 조건:</span>
+                            <input type="text" id="loseCond" placeholder="(예: 방해물에 3번 부딪히기)" class="flex-1 border-b border-slate-200 outline-none focus:border-blue-500 p-1">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="space-y-2">
+                    <h2 class="font-bold text-slate-900 text-base">[5. 게임 오버 화면 메시지]</h2>
+                    <p class="text-xs text-slate-600">실패 시 유저에게 경각심을 줄 캠페인 문구를 적어주세요.</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-xl">👉</span>
+                        <input type="text" id="gameOverMsg" placeholder="(예: 결국 해양 생태계가 완전히 파괴되었습니다...)" class="flex-1 border-b-2 border-slate-200 p-1 focus:border-blue-500 outline-none italic">
+                    </div>
+                </section>
+
+                <section class="space-y-3 pb-8">
+                    <h2 class="font-bold text-slate-900 text-base">[6. 조작 방법] (택 1)</h2>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-2">
+                        <label class="flex items-center gap-2 cursor-pointer border p-3 rounded-xl hover:bg-slate-50 flex-1 transition-all">
+                            <input type="radio" name="control" value="스마트폰 터치 또는 마우스 클릭">
+                            <span class="text-sm">스마트폰 터치 / 클릭</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer border p-3 rounded-xl hover:bg-slate-50 flex-1 transition-all">
+                            <input type="radio" name="control" value="키보드 방향키(←, →, ↑, ↓)">
+                            <span class="text-sm">키보드 방향키 (←, →, ↑, ↓)</span>
+                        </label>
+                    </div>
+                </section>
+
+            </div>
+            
+            <div class="bg-white p-4 border-t border-slate-200 flex-shrink-0">
+                <button id="generateBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+                    게임 개발자 프롬프트 생성하기
+                </button>
+            </div>
+        </div>
+
+        <div class="w-full md:flex-1 bg-slate-900 rounded-2xl shadow-xl flex flex-col md:overflow-hidden min-h-[500px] md:h-full relative text-slate-300 mb-4 md:mb-0">
+            <div class="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center flex-shrink-0">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    생성된 프롬프트
+                </h2>
+                <button id="copyBtn" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white py-2 px-4 rounded-lg font-bold transition-all border border-indigo-500 active:scale-95">
+                    프롬프트 복사
+                </button>
+            </div>
+            <div class="p-6 flex-1 relative md:overflow-y-auto">
+                <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+                    <p>학습지 내용을 채우고 버튼을 눌러주세요.</p>
+                </div>
+                <div id="promptOutput" class="hidden text-sm leading-relaxed whitespace-pre-wrap font-mono text-slate-200"></div>
+            </div>
+        </div>
+    </div>
+
+    <textarea id="tempCopyArea" style="position: absolute; left: -9999px; opacity: 0;" aria-hidden="true"></textarea>
+
+    <footer class="text-center pb-3 pt-2 text-slate-500 text-xs">
+        &copy; 2026 크레오디교육연구소. All rights reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const promptOutput = document.getElementById('promptOutput');
+            const emptyState = document.getElementById('emptyState');
+            const tempCopyArea = document.getElementById('tempCopyArea');
+
+            generateBtn.addEventListener('click', () => {
+                const genre = document.querySelector('input[name="genre"]:checked');
+                const background = document.getElementById('gameBackground').value.trim();
+                const player = document.getElementById('player').value.trim();
+                const obstacle = document.getElementById('obstacle').value.trim();
+                const item = document.getElementById('item').value.trim() || '없음';
+                const winCond = document.getElementById('winCond').value.trim();
+                const loseCond = document.getElementById('loseCond').value.trim();
+                const gameOverMsg = document.getElementById('gameOverMsg').value.trim();
+                const control = document.querySelector('input[name="control"]:checked');
+
+                if (!genre || !background || !player || !obstacle || !winCond || !loseCond || !gameOverMsg || !control) {
+                    alert('모든 필수 항목을 입력하거나 선택해주세요!');
+                    return;
+                }
+
+                // 강사님이 요청하신 [시스템 역할 지정] 형식을 포함한 최종 프롬프트
+                const resultText = `[시스템 역할 지정]
+너는 HTML5, CSS3, JavaScript(Canvas API)에 정통한 **'교육용 게임 개발자'**야. 중고등학생들이 환경 경각심을 가질 수 있도록, 아래 기획안을 바탕으로 한 페이지(Single File)로 구성된 웹 게임을 만들어줘.
+
+[1. 게임 컨셉 및 장르]
+장르: ${genre.value}
+배경: 2060년의 재난 상황 - ${background}
+
+[2. 캐릭터 및 오브젝트 설정]
+주인공(플레이어): ${player}
+방해물(피해야 할 것): ${obstacle}
+아이템(선택사항): ${item}
+
+[3. 게임 룰 및 엔딩]
+승리 조건: ${winCond}
+실패 조건: ${loseCond}
+게임 오버 메시지: "${gameOverMsg}"
+
+[4. 기술적 요구사항 (중요)]
+조작 방법: [ ${control.value} ]를 지원할 것.
+디자인: 배경은 2060년의 암울한 분위기가 느껴지도록 CSS Gradient나 단순한 도형 드로잉으로 표현해줘. 별도의 이미지 파일 없이 Canvas API만 사용해서 그래픽을 그려줘.
+코드 구조: HTML, CSS, JavaScript가 하나의 .html 파일에 모두 포함된 코드를 작성해줘.
+UI: 화면 상단에 '현재 점수' 혹은 '남은 시간'과 '체력'이 표시되게 해줘.
+
+[5. 실행]
+자, 이제 위 기획을 바탕으로 바로 플레이 가능한 전체 코드를 작성해줘.`;
+
+                promptOutput.textContent = resultText;
+                emptyState.classList.add('hidden');
+                promptOutput.classList.remove('hidden');
+                copyBtn.classList.remove('hidden');
+                
+                if (window.innerWidth < 768) {
+                    promptOutput.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+            // 복사 기능 (전통적인 execCommand 방식 적용)
+            copyBtn.addEventListener('click', () => {
+                tempCopyArea.value = promptOutput.textContent;
+                tempCopyArea.select();
+                tempCopyArea.setSelectionRange(0, 99999); // 모바일 기기 대응
+
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        const originalText = copyBtn.textContent;
+                        copyBtn.textContent = '복사 완료! ✅';
+                        copyBtn.classList.replace('bg-indigo-600', 'bg-green-600');
+                        setTimeout(() => {
+                            copyBtn.textContent = originalText;
+                            copyBtn.classList.replace('bg-green-600', 'bg-indigo-600');
+                        }, 2000);
+                    }
+                } catch (err) {
+                    alert('복사에 실패했습니다. 직접 드래그하여 복사해 주세요.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
