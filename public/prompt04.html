@@ -17,6 +17,7 @@
 
     <div class="flex-1 w-full max-w-7xl mx-auto flex flex-col md:flex-row p-4 md:p-6 gap-4 md:min-h-0">
 
+        <!-- 왼쪽 입력 영역 -->
         <div class="w-full md:flex-1 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col md:overflow-hidden md:h-full relative text-sm">
             
             <div class="bg-indigo-50/50 p-4 border-b border-slate-100 flex-shrink-0">
@@ -94,6 +95,7 @@
             </div>
         </div>
 
+        <!-- 오른쪽 결과 영역 -->
         <div class="w-full md:flex-1 bg-slate-900 rounded-2xl shadow-xl flex flex-col md:overflow-hidden min-h-[300px] md:h-full relative text-slate-300">
             <div class="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center flex-shrink-0">
                 <h2 class="text-lg font-bold text-white flex items-center gap-2">📜 생성된 프롬프트</h2>
@@ -103,13 +105,16 @@
             </div>
             <div class="p-6 flex-1 relative md:overflow-y-auto">
                 <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 text-center p-6">
-                    <p>학습지를 채우고 버튼을 누르세요.</p>
+                    <p>항목을 채우고 생성 버튼을 누르세요.</p>
                 </div>
                 <div id="promptOutput" class="hidden text-lg leading-relaxed whitespace-pre-wrap font-mono text-indigo-200 break-all"></div>
                 <div id="charCounter" class="hidden mt-4 text-xs text-slate-500 border-t border-slate-800 pt-2 font-mono"></div>
             </div>
         </div>
     </div>
+
+    <!-- 복사를 위한 임시 텍스트 영역 (화면에서 숨김) -->
+    <textarea id="tempCopyArea" class="absolute -left-[9999px]" aria-hidden="true"></textarea>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -127,34 +132,42 @@
                 const genre = document.querySelector('input[name="genre"]:checked');
 
                 if (!tempo || !mood || !instrument || !genre) {
-                    alert('항목을 선택해주세요!'); return;
+                    alert('모든 항목을 선택 및 입력해주세요!'); 
+                    return;
                 }
 
-                // AI가 가장 효과적으로 인식하는 키워드 나열 방식으로 최적화 (180자 이내)
+                // AI가 가장 효과적으로 인식하는 키워드 나열 방식으로 최적화
                 const resultText = `Instrumental, ${genre.value}, ${tempo.value}, ${mood.value}, Lead instrument: ${instrument}, high quality audio.`;
 
                 promptOutput.textContent = resultText;
-                charCounter.textContent = `글자 수: \${resultText.length}자 / 180자`;
+                
+                // 백슬래시 오타 수정 (${...} 로 정상 동작하도록)
+                charCounter.textContent = `글자 수: ${resultText.length}자 / 180자`;
                 
                 emptyState.classList.add('hidden');
                 promptOutput.classList.remove('hidden');
                 charCounter.classList.remove('hidden');
                 copyBtn.classList.remove('hidden');
+                
                 if (window.innerWidth < 768) promptOutput.scrollIntoView({ behavior: 'smooth' });
             });
 
             copyBtn.addEventListener('click', () => {
                 tempCopyArea.value = promptOutput.textContent;
                 tempCopyArea.select();
-                tempCopyArea.setSelectionRange(0, 99999);
+                tempCopyArea.setSelectionRange(0, 99999); // 모바일 대응
+                
                 try {
                     document.execCommand('copy');
                     const originalText = copyBtn.textContent;
                     copyBtn.textContent = '복사 완료!';
                     copyBtn.classList.replace('bg-indigo-600', 'bg-green-600');
+                    copyBtn.classList.replace('border-indigo-500', 'border-green-500');
+                    
                     setTimeout(() => {
-                        copyBtn.textContent = originalText;
+                        copyBtn.textContent = '프롬프트 복사';
                         copyBtn.classList.replace('bg-green-600', 'bg-indigo-600');
+                        copyBtn.classList.replace('border-green-500', 'border-indigo-500');
                     }, 2000);
                 } catch (err) {
                     alert('복사 실패');
