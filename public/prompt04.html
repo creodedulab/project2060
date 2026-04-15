@@ -113,16 +113,12 @@
         </div>
     </div>
 
-    <!-- 복사를 위한 임시 텍스트 영역 (화면에서 숨김) -->
-    <textarea id="tempCopyArea" class="absolute -left-[9999px]" aria-hidden="true"></textarea>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const generateBtn = document.getElementById('generateBtn');
             const copyBtn = document.getElementById('copyBtn');
             const promptOutput = document.getElementById('promptOutput');
             const emptyState = document.getElementById('emptyState');
-            const tempCopyArea = document.getElementById('tempCopyArea');
             const charCounter = document.getElementById('charCounter');
 
             generateBtn.addEventListener('click', () => {
@@ -153,13 +149,21 @@
             });
 
             copyBtn.addEventListener('click', () => {
-                tempCopyArea.value = promptOutput.textContent;
-                tempCopyArea.select();
-                tempCopyArea.setSelectionRange(0, 99999); // 모바일 대응
+                // 브라우저 및 모바일 환경에서 안정적인 복사를 위해 텍스트 영역 동적 생성
+                const textArea = document.createElement('textarea');
+                textArea.value = promptOutput.textContent;
+                textArea.style.position = 'fixed'; // 화면 스크롤 튀는 현상 방지
+                textArea.style.top = '0';
+                textArea.style.left = '0';
+                textArea.style.opacity = '0'; // 눈에 보이지 않도록 처리
+                document.body.appendChild(textArea);
+                
+                textArea.focus(); // 모바일 기기에서의 원활한 선택 및 복사를 위해 필수
+                textArea.select();
+                textArea.setSelectionRange(0, 99999); // 모바일 대응
                 
                 try {
                     document.execCommand('copy');
-                    const originalText = copyBtn.textContent;
                     copyBtn.textContent = '복사 완료!';
                     copyBtn.classList.replace('bg-indigo-600', 'bg-green-600');
                     copyBtn.classList.replace('border-indigo-500', 'border-green-500');
@@ -170,7 +174,9 @@
                         copyBtn.classList.replace('border-green-500', 'border-indigo-500');
                     }, 2000);
                 } catch (err) {
-                    alert('복사 실패');
+                    alert('복사에 실패했습니다. 텍스트를 직접 선택하여 복사해주세요.');
+                } finally {
+                    document.body.removeChild(textArea); // 사용 후 즉시 제거
                 }
             });
         });
