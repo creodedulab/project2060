@@ -85,20 +85,41 @@
         // 아이콘 초기화 (Lucide 아이콘 화면에 표시)
         lucide.createIcons();
 
+        // UI를 홈 화면으로 되돌리는 전담 함수
+        function showHomeUI() {
+            contentFrame.src = '';                       // iframe 내용 비우기
+            iframeView.classList.add('hidden');          // iframe 숨기기
+            iframeView.classList.remove('flex');
+            menuView.classList.remove('hidden');         // 메뉴 다시 보이기
+        }
+
         // 페이지 열기 함수 (버튼 클릭 시)
         function openPage(link) {
             contentFrame.src = link;
             menuView.classList.add('hidden');          // 메뉴 숨기기
             iframeView.classList.remove('hidden');       // iframe 보이기
             iframeView.classList.add('flex');            // 레이아웃 유지
+            
+            // 브라우저 뒤로가기 버튼을 지원하기 위해 히스토리에 가상 해시(#view) 추가
+            history.pushState({ isIframeOpen: true }, '', '#view');
         }
+
+        // 브라우저 뒤로가기/앞으로가기 이벤트 감지
+        window.addEventListener('popstate', (event) => {
+            // 현재 주소에 #view가 없다면 홈 화면으로 간주하고 UI 복구
+            if (window.location.hash !== '#view') {
+                showHomeUI();
+            }
+        });
 
         // 홈으로 돌아가기 함수 (홈 버튼 클릭 시)
         homeBtn.onclick = () => {
-            contentFrame.src = '';                       // iframe 내용 비우기
-            iframeView.classList.add('hidden');          // iframe 숨기기
-            iframeView.classList.remove('flex');
-            menuView.classList.remove('hidden');         // 메뉴 다시 보이기
+            // 해시가 #view인 상태라면, 브라우저 히스토리를 맞추기 위해 뒤로가기 실행 (popstate 유발)
+            if (window.location.hash === '#view') {
+                history.back();
+            } else {
+                showHomeUI(); // 혹시 모를 예외 상황 대비 강제 전환
+            }
         };
     </script>
 </body>
